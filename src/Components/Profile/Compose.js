@@ -2,16 +2,16 @@ import React, { useRef, useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import classes from "./Profile.module.css";
+import classes from "./Compose.module.css";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import InputGroup from "react-bootstrap/InputGroup";
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState } from "draft-js";
 
 import { useSelector } from "react-redux";
 import { convertToHTML } from "draft-convert";
 
-const Profile = () => {
+const Compose = () => {
   const sendToEmailInputRef = useRef();
   const subInputRef = useRef();
   const formRef = useRef();
@@ -27,12 +27,13 @@ const Profile = () => {
       to: sendToEmailInputRef.current.value,
       emailSub: subInputRef.current.value,
       emailContent: convertToHTML(editorState.getCurrentContent()),
+      date: new Date()
     };
 
     // console.log(emailObj)
 
     try {
-        const senderEmail = auth.email.replace(/[\.@]/g, "");
+      const senderEmail = auth.email.replace(/[\.@]/g, "");
       const res = fetch(
         `https://mail-box-myreact-default-rtdb.firebaseio.com/${senderEmail}/sentEmails.json`,
         {
@@ -48,13 +49,37 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
+    console.log(auth.email)
+    const emailObj2 = {
+      from: auth.email,
+      emailSub: subInputRef.current.value,
+      emailContent: convertToHTML(editorState.getCurrentContent()),
+      date: new Date()
+    };
+    try {
+      const recieverEmail = sendToEmailInputRef.current.value.replace(/[\.@]/g, "");
+      const res = fetch(
+        `https://mail-box-myreact-default-rtdb.firebaseio.com/${recieverEmail}/recievedEmails.json`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ...emailObj2,
+          }),
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+
     formRef.current.reset();
     updateEditorState('');
   };
 
   return (
     <section className={classes.form}>
-      <h1>Welcome to Metro mail</h1>
       <Form onSubmit={sendEmailHandler} ref={formRef}>
         <InputGroup className={classes.mail}>
           <InputGroup.Text id="btnGroupAddon">To</InputGroup.Text>
@@ -65,9 +90,12 @@ const Profile = () => {
             aria-describedby="btnGroupAddon"
             ref={sendToEmailInputRef}
           />
+          <div style={{margin: '3px'}}>
           <Button variant="primary" type="submit">
             Send Email
           </Button>
+          </div>
+         
         </InputGroup>
         <InputGroup className={classes.subject}>
           <InputGroup.Text id="btnGroupAddon">Subject</InputGroup.Text>
@@ -94,4 +122,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Compose;
