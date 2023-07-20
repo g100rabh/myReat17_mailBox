@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -80,7 +80,7 @@ const Inbox = () => {
             <tr
             className={classes.tblRow}
               onClick={() => clickEmailHanler(i)}
-              className={i[1].unread ? classes.unreadRow : ""}
+              className={i[1].unread && auth.isLoggedIn ? classes.unreadRow : ""}
               key={i[1].id}
             >
               <td>
