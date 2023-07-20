@@ -62,8 +62,8 @@ const Compose = () => {
       // if(res.ok){
       updateSuccessFullySentMail(true);
       // }
-      if(!res.ok){
-        throw Error ('Unable to send')
+      if(res.ok){
+        console.log('sent')
       }
     } catch (error) {
       alert(error);
@@ -95,8 +95,8 @@ const Compose = () => {
         }
       
       );
-      if(!res.ok){
-        throw Error ('Unable to send')
+      if(res.ok){
+        console.log('sent')
       }
     } catch (error) {
       alert(error);
