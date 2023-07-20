@@ -74,6 +74,7 @@ const Inbox = () => {
         <tbody>
           {inboxItem.map((i) => (
             <tr
+            className={classes.tblRow}
               onClick={() => clickEmailHanler(i)}
               className={i[1].unread ? classes.unreadRow : ""}
               key={i[0]}

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { inboxActions, inboxItemFill } from "../../store/inbox-slice";
 import { sentboxItemFill } from "../../store/sentbox-slice";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import classes from "./SideBar.module.css";
 
@@ -37,7 +38,7 @@ const SideBar = () => {
   return (
     <Fragment>
       <div className={classes.mailCon}>
-        <table>
+        <table className="d-md-table">
           <tbody>
             <tr>
               <td>

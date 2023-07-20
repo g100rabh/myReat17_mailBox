@@ -68,7 +68,7 @@ function LogIn() {
       const data = await resLogin.json();
 
       if (resLogin.ok) {
-        console.log("Logged IN");
+        // console.log("Logged IN");
         dispatch(
           authActions.login({ tokenId: data.idToken, email: enteredEmail })
         );

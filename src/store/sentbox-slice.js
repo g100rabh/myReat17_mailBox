@@ -21,6 +21,9 @@ const sentboxSlice = createSlice({
         const filterItems = state.sentboxItems.filter(element => element[0] !== action.payload[0]);
         // console.log(filter);
         state.sentboxItems = filterItems;
+    },
+    onLogoutSentboxNull(state){
+        state.sentboxItems=[]
     }
   },
 });
@@ -37,13 +40,16 @@ export const sentboxItemFill = (email) => {
       const data = await resSentbox.json();
     //   console.log(data)
 
-      if (resSentbox.ok) {
+      if (resSentbox.ok && data !== null) {
         dispatch(sentboxActions.addItems(Object.entries(data)));
         // console.log("yes");
-      }
+      } else if(!resSentbox.ok) {
+        throw Error('Failed to fetch sentbox.')
+        }
     } catch (error) {
       alert(error);
     }
+    // dispatch(sentboxActions.addItems(Object.entries(data)));
   };
 };
 

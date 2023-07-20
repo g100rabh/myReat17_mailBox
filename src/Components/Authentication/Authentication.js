@@ -18,8 +18,8 @@ const Authentication = () => {
   return (
     <section className={classes.auth}>
       <Card>
-        {!isLoginVisible&& <SignUp />}
-        {isLoginVisible && <LogIn />}
+        {!isLoginVisible&& <SignUp className={classes.authPage} />}
+        {isLoginVisible && <LogIn className={classes.authPage} />}
 
         <div className={classes.lowerCon}>
           <p>
