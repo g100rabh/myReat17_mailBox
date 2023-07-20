@@ -25,7 +25,7 @@ function App() {
       dispatch(inboxItemFill(auth.email));
       dispatch(sentboxItemFill(auth.email));
     }
-  }, [])
+  })
 
   useEffect(() => {
     if (auth.isLoggedIn) {
