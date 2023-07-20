@@ -80,7 +80,7 @@ const Inbox = () => {
             <tr
             className={classes.tblRow}
               onClick={() => clickEmailHanler(i)}
-              className={i[1].unread ? classes["unreadRow"] : ""}
+            //   className={i[1].unread ? classes["unreadRow"] : ""}
               key={i[1].id}
             >
               <td>
