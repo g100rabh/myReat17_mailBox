@@ -24,6 +24,13 @@ function App() {
     if (auth.isLoggedIn) {
       dispatch(inboxItemFill(auth.email));
       dispatch(sentboxItemFill(auth.email));
+    }
+  }, [])
+
+  useEffect(() => {
+    if (auth.isLoggedIn) {
+      dispatch(inboxItemFill(auth.email));
+      dispatch(sentboxItemFill(auth.email));
 
       // Start the interval and store the reference
       intervalRef.current = setInterval(() => {
@@ -38,6 +45,8 @@ function App() {
       clearInterval(intervalRef.current);
     };
   }, [auth.isLoggedIn, dispatch, auth.email]);
+
+  
 
   return (
     <div className="App">
