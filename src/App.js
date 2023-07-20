@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Authentication from "./Components/Authentication/Authentication";
@@ -18,20 +18,26 @@ function App() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (auth.isLoggedIn && localStorage.getItem("userEmail")) {
-      dispatch(inboxItemFill(localStorage.getItem("userEmail")));
-      dispatch(sentboxItemFill(localStorage.getItem("userEmail")));
-    }
-  }, []);
+  const intervalRef = useRef(null);
 
-  setInterval(() => {
-    if (auth.isLoggedIn && localStorage.getItem("userEmail")) {
-      dispatch(inboxItemFill(localStorage.getItem("userEmail")));
-      dispatch(sentboxItemFill(localStorage.getItem("userEmail")));
-      console.log("render");
+  useEffect(() => {
+    if (auth.isLoggedIn) {
+      dispatch(inboxItemFill(auth.email));
+      dispatch(sentboxItemFill(auth.email));
+
+      // Start the interval and store the reference
+      intervalRef.current = setInterval(() => {
+        dispatch(inboxItemFill(auth.email));
+        dispatch(sentboxItemFill(auth.email));
+        console.log("render");
+      }, 2000);
     }
-  }, 2000);
+
+    // Clean up the interval when the component unmounts or when auth.isLoggedIn changes to false
+    return () => {
+      clearInterval(intervalRef.current);
+    };
+  }, [auth.isLoggedIn, dispatch, auth.email]);
 
   return (
     <div className="App">

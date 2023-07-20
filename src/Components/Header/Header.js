@@ -17,8 +17,8 @@ function Header() {
   const clickLogoutHandler = () => {
     dispatch(inboxActions.onLogoutInboxNull());
     dispatch(sentboxActions.onLogoutSentboxNull());
-    dispatch(authActions.logout());
     navigate('/', {replace: true})
+    dispatch(authActions.logout());
     
     console.log(auth)
   }
