@@ -12,6 +12,7 @@ import EmailMessage from "./Components/Profile/EmailMessage";
 import SentBox from "./Components/Profile/SentBox";
 import { sentboxItemFill } from "./store/sentbox-slice";
 import Profile from "./Components/Profile/Profile";
+import SentMessageRead from "./Components/Profile/SentMessageRead";
 
 function App() {
 
@@ -46,7 +47,7 @@ function App() {
             <Route path="/profile/inbox" element={<Inbox />} exact/>
             <Route path="/profile/inbox/message" element={<EmailMessage />} exact/>
             <Route path="/profile/sentbox" element={<SentBox />} exact/>
-            <Route path="/profile/sentbox/message" element={<EmailMessage />} exact/>
+            <Route path="/profile/sentbox/message" element={<SentMessageRead />} exact/>
           </Route>}
         </Route>
       </Routes>
