@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authActions } from "../../store/auth-slice";
-import { inboxActions, inboxItemFill } from "../../store/inbox-slice";
+import { inboxItemFill } from "../../store/inbox-slice";
 
 function LogIn() {
   const emailInputRef = useRef();

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { inboxActions, inboxItemFill } from "../../store/inbox-slice";
+import { inboxItemFill } from "../../store/inbox-slice";
 import { sentboxItemFill } from "../../store/sentbox-slice";
 import 'bootstrap/dist/css/bootstrap.min.css';
 

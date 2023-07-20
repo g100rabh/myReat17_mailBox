@@ -3,7 +3,6 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import classes from "./SentBox.module.css";
-import { GoDotFill, GoDot } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { sentboxActions } from "../../store/sentbox-slice";
 import { MdDelete } from "react-icons/md";
