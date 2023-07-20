@@ -81,11 +81,6 @@ function LogIn() {
       alert(error);
     }
   };
-
-  // useEffect(()=> {
-  //   dispatch(inboxItemFill(localStorage.getItem('userEmail')))
-  //   console.log('object');
-  // }, [auth.email])
  
   
   return (

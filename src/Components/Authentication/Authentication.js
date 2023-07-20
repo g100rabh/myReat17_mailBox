@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Card from "../UI/Card";
 
 import classes from "./Authentication.module.css";
@@ -20,9 +21,9 @@ const Authentication = () => {
         {!isLoginVisible&& <SignUp />}
         {isLoginVisible && <LogIn />}
 
-        <div>
+        <div className={classes.lowerCon}>
           <p>
-            {!isLoginVisible ? "Already have an account?" : "Create new account." }<button onClick={switchHandler}>{!isLoginVisible ? "Log In" : "Sign up"}</button>
+            {!isLoginVisible ? "Already have an account?" : "Create new account." }<button className={classes.switchBtn} onClick={switchHandler}><Link>{!isLoginVisible ? "Log In" : "Sign up"}</Link></button>
           </p>
         </div>
       </Card>

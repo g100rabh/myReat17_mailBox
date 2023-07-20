@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,6 +11,7 @@ import { MdDelete } from "react-icons/md";
 const Inbox = () => {
   const inboxItem = useSelector((state) => state.inbox.inboxItems);
   //   console.log(inboxItem);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -21,7 +22,7 @@ const Inbox = () => {
     dispatch(inboxActions.addMessageOpen(item));
 
     const email = auth.email.replace(/[\.@]/g, "");
-    try {
+    try { 
       const resEmail = await fetch(
         `https://mail-box-myreact-default-rtdb.firebaseio.com/${email}/recievedEmails/${item[0]}.json`,
         {
@@ -60,6 +61,7 @@ const Inbox = () => {
   return (
     <section className={classes.inboxCon}>
       <h3>Inbox</h3>
+      {loading && <h5>Loading...</h5>}
       <Table striped hover>
         <thead>
           <tr>

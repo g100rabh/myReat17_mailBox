@@ -17,6 +17,9 @@ const authSlice = createSlice({
             localStorage.setItem('userEmail', action.payload.email);
             state.isLoggedIn = true;
             localStorage.setItem('isLoggedIn', true);
+        },
+        logout(state){
+            localStorage.clear();
         }
     }
 });
