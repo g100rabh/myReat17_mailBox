@@ -25,11 +25,11 @@ const Compose = () => {
     e.preventDefault();
     // console.log(sendToEmailInputRef.current.value, subInputRef.current.value);
     // console.log(convertToRaw(editorState.getCurrentContent()).blocks);
-    if(sendToEmailInputRef.current.value == ''){
+    if (sendToEmailInputRef.current.value === "") {
       // alert('Please fill recipient email')
-      setEmptyEmail('*Please enter recipient email')
+      setEmptyEmail("*Please enter recipient email");
       setTimeout(() => {
-        setEmptyEmail(null)
+        setEmptyEmail(null);
       }, 10000);
       return;
     }
@@ -40,13 +40,13 @@ const Compose = () => {
       emailSub: subInputRef.current.value,
       emailContent: convertToHTML(editorState.getCurrentContent()),
       date: new Date(),
-      unread: true
+      unread: true,
     };
 
     // console.log(emailObj)
 
     try {
-      const senderEmail = auth.email.replace(/[\.@]/g, "");
+      const senderEmail = auth.email.replace(/[.@]/g, "");
       const res = fetch(
         `https://mail-box-myreact-default-rtdb.firebaseio.com/${senderEmail}/sentEmails.json`,
         {
@@ -60,8 +60,11 @@ const Compose = () => {
         }
       );
       // if(res.ok){
-        updateSuccessFullySentMail(true);
+      updateSuccessFullySentMail(true);
       // }
+      if(!res.ok){
+        throw Error ('Unable to send')
+      }
     } catch (error) {
       alert(error);
     }
@@ -72,11 +75,11 @@ const Compose = () => {
       emailSub: subInputRef.current.value,
       emailContent: convertToHTML(editorState.getCurrentContent()),
       date: new Date(),
-      unread: true
+      unread: true,
     };
     try {
       const recieverEmail = sendToEmailInputRef.current.value.replace(
-        /[\.@]/g,
+        /[.@]/g,
         ""
       );
       const res = fetch(
@@ -90,7 +93,11 @@ const Compose = () => {
             "content-type": "application/json",
           },
         }
+      
       );
+      if(!res.ok){
+        throw Error ('Unable to send')
+      }
     } catch (error) {
       alert(error);
     }
@@ -104,10 +111,11 @@ const Compose = () => {
 
   return (
     <section className={classes.form}>
-       {successFullySentMail && <p style={{color: 'green'}}>SuccessFully sent mail.</p>}
-      <Form  ref={formRef}>
-     
-        <p style={{color: 'red'}}>{emptyEmail}</p>
+      {successFullySentMail && (
+        <p style={{ color: "green" }}>SuccessFully sent mail.</p>
+      )}
+      <Form ref={formRef}>
+        <p style={{ color: "red" }}>{emptyEmail}</p>
         <InputGroup className={classes.mail}>
           <InputGroup.Text id="btnGroupAddon">To</InputGroup.Text>
           <Form.Control
@@ -118,7 +126,9 @@ const Compose = () => {
             ref={sendToEmailInputRef}
             className={emptyEmail ? classes.invalid : ""}
           />
-          <InputGroup.Text id="btnGroupAddon"><button className={classes.ccBtn}>CC/BCC</button></InputGroup.Text>
+          <InputGroup.Text id="btnGroupAddon">
+            <button className={classes.ccBtn}>CC/BCC</button>
+          </InputGroup.Text>
         </InputGroup>
         <InputGroup className={classes.subject}>
           <InputGroup.Text id="btnGroupAddon">Subject</InputGroup.Text>

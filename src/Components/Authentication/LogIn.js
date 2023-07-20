@@ -11,7 +11,6 @@ function LogIn() {
   const passInputRef = useRef();
   const [inputRequire, setInputRequire] = useState(false);
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   // const inboxItemFill = async () => {

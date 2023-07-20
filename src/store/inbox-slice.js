@@ -35,7 +35,7 @@ export const inboxActions = inboxSlice.actions;
 export const inboxItemFill = (email) => {
   return async (dispatch) => {
     try {
-      const userEmail = email.replace(/[\.@]/g, "");
+      const userEmail = email.replace(/[.@]/g, "");
       const resInbox = await fetch(
         `https://mail-box-myreact-default-rtdb.firebaseio.com/${userEmail}/recievedEmails.json`
       );

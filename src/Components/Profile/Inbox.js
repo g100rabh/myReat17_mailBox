@@ -11,7 +11,6 @@ import { MdDelete } from "react-icons/md";
 const Inbox = () => {
   const inboxItem = useSelector((state) => state.inbox.inboxItems);
   //   console.log(inboxItem);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
@@ -21,7 +20,7 @@ const Inbox = () => {
     navigate("/profile/inbox/message", { replace: true });
     dispatch(inboxActions.addMessageOpen(item));
 
-    const email = auth.email.replace(/[\.@]/g, "");
+    const email = auth.email.replace(/[.@]/g, "");
     try { 
       const resEmail = await fetch(
         `https://mail-box-myreact-default-rtdb.firebaseio.com/${email}/recievedEmails/${item[0]}.json`,
@@ -40,6 +39,9 @@ const Inbox = () => {
           },
         }
       );
+      if(!resEmail.ok){
+          throw Error ('error')
+      }
     } catch (error) {
       alert(error);
     }
@@ -48,11 +50,14 @@ const Inbox = () => {
   const clickDeleteHandler = async (deleteItem) => {
     // console.log(item);
     dispatch(inboxActions.removeItem(deleteItem));
-    const email = auth.email.replace(/[\.@]/g, "");
+    const email = auth.email.replace(/[.@]/g, "");
     try {
         const resDlt = await fetch(`https://mail-box-myreact-default-rtdb.firebaseio.com/${email}/recievedEmails/${deleteItem[0]}.json`,{
             method: 'DELETE'
         })
+        if(!resDlt.ok){
+            throw Error ('Failed to delete')
+        }
     } catch(error) {
         alert(error);
     }
@@ -61,7 +66,6 @@ const Inbox = () => {
   return (
     <section className={classes.inboxCon}>
       <h3>Inbox</h3>
-      {loading && <h5>Loading...</h5>}
       <Table striped hover>
         <thead>
           <tr>
@@ -77,7 +81,7 @@ const Inbox = () => {
             className={classes.tblRow}
               onClick={() => clickEmailHanler(i)}
               className={i[1].unread ? classes.unreadRow : ""}
-              key={i[0]}
+              key={i[1].id}
             >
               <td>
                 {i[1].unread ? (

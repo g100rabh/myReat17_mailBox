@@ -11,7 +11,6 @@ import classes from "./SideBar.module.css";
 const SideBar = () => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
-  const inboxItem = useSelector((state) => state.inbox.inboxItems);
   const dispatch = useDispatch();
   const inboxItems = useSelector((state) => state.inbox.inboxItems);
 

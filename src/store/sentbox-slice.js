@@ -33,7 +33,7 @@ export const sentboxActions = sentboxSlice.actions;
 export const sentboxItemFill = (email) => {
   return async (dispatch) => {
     try {
-      const userEmail = email.replace(/[\.@]/g, "");
+      const userEmail = email.replace(/[.@]/g, "");
       const resSentbox = await fetch(
         `https://mail-box-myreact-default-rtdb.firebaseio.com/${userEmail}/sentEmails.json`
       );
