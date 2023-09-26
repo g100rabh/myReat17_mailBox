@@ -27,7 +27,7 @@ function Header() {
       <Navbar className={classes["bg-body-tertiary"]}>
         <Container className={classes.navcon}>
           <Navbar.Brand href="#home" className={classes.brand}>
-            Metro Mail
+            MyWebLink
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
