@@ -83,7 +83,7 @@ const Compose = () => {
         ""
       );
       const res = fetch(
-        `https://mail-box-myreact-default-rtdb.firebaseio.com/${recieverEmail}/recievedEmails.json`,
+        `https://mailbox-93f2f-default-rtdb.firebaseio.com/${recieverEmail}/recievedEmails.json`,
         {
           method: "POST",
           body: JSON.stringify({

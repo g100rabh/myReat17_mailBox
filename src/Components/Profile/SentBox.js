@@ -25,7 +25,7 @@ const SentBox = () => {
       dispatch(sentboxActions.removeItem(deleteItem));
       const email = auth.email.replace(/[.@]/g, "");
       try {
-          const resDlt = await fetch(`https://mail-box-myreact-default-rtdb.firebaseio.com/${email}/sentEmails/${deleteItem[0]}.json`,{
+          const resDlt = await fetch(`https://mailbox-93f2f-default-rtdb.firebaseio.com/${email}/sentEmails/${deleteItem[0]}.json`,{
               method: 'DELETE'
           })
           if(!resDlt.ok){

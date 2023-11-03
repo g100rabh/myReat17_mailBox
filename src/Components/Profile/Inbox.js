@@ -23,7 +23,7 @@ const Inbox = () => {
     const email = auth.email.replace(/[.@]/g, "");
     try { 
       const resEmail = await fetch(
-        `https://mail-box-myreact-default-rtdb.firebaseio.com/${email}/recievedEmails/${item[0]}.json`,
+        `https://mailbox-93f2f-default-rtdb.firebaseio.com/${email}/recievedEmails/${item[0]}.json`,
         {
           method: "PUT",
           body: JSON.stringify({
@@ -52,7 +52,7 @@ const Inbox = () => {
     dispatch(inboxActions.removeItem(deleteItem));
     const email = auth.email.replace(/[.@]/g, "");
     try {
-        const resDlt = await fetch(`https://mail-box-myreact-default-rtdb.firebaseio.com/${email}/recievedEmails/${deleteItem[0]}.json`,{
+        const resDlt = await fetch(`https://mailbox-93f2f-default-rtdb.firebaseio.com/${email}/recievedEmails/${deleteItem[0]}.json`,{
             method: 'DELETE'
         })
         if(!resDlt.ok){
