@@ -35,7 +35,7 @@ export const sentboxItemFill = (email) => {
     try {
       const userEmail = email.replace(/[.@]/g, "");
       const resSentbox = await fetch(
-        `https://mail-box-myreact-default-rtdb.firebaseio.com/${userEmail}/sentEmails.json`
+        `https://mailbox-93f2f-default-rtdb.firebaseio.com/${userEmail}/sentEmails.json`
       );
       const data = await resSentbox.json();
     //   console.log(data)

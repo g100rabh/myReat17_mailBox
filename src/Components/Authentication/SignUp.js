@@ -37,7 +37,7 @@ function SignUp() {
     setPassMatch(false);
     try {
       const res = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyADjbEqHxv0vkblPUBf3hbkYu4GfoUUNMY",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAaA4WRuL5V31kOeJANM4eHW7p_RVt1uRE",
         {
           method: "POST",
           body: JSON.stringify({
